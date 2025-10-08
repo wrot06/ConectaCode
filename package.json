@@ -1,0 +1,102 @@
+{
+  "name": "conectacode",
+  "displayName": "ConectaCode",
+  "description": "Connect Visual Studio Code to remote servers via FTP and SSH",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.104.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+  {
+    "command": "conectacode.connectFTP",
+    "title": "Connect to FTP Server ConectaCode"
+  },
+  {
+    "command": "conectacode.addServer",
+    "title": "Agregar conexión"
+  },
+  {
+    "command": "conectacode.connectServer",
+    "title": "Conectar a servidor"
+  },
+  {
+    "command": "conectacode.editServer",
+    "title": "Editar"
+  },
+  {
+    "command": "conectacode.deleteServer",
+    "title": "Eliminar"
+  }
+],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "conectacodeViewContainer",
+          "title": "ConectaCode",
+          "icon": "resources/server.svg"
+        }
+      ]
+    },
+    "views": {
+      "conectacodeViewContainer": [
+        {
+          "id": "conectacodeServersView",
+          "name": "List",
+          "icon": "resources/server.svg"
+        }
+      ]
+    },
+    "menus": {
+  "view/title": [
+    {
+      "command": "conectacode.addServer",
+      "when": "view == conectacodeServersView",
+      "group": "navigation"
+    }
+  ],
+  "view/item/context": [
+    {
+      "command": "conectacode.editServer",
+      "when": "view == conectacodeServersView && viewItem == serverItem",
+      "group": "inline"
+    },
+    {
+      "command": "conectacode.deleteServer",
+      "when": "view == conectacodeServersView && viewItem == serverItem",
+      "group": "inline"
+    }
+  ]
+}
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/node": "22.x",
+    "@types/ssh2": "^1.15.5",
+    "@types/vscode": "^1.104.0",
+    "@typescript-eslint/eslint-plugin": "^8.45.0",
+    "@typescript-eslint/parser": "^8.45.0",
+    "@vscode/test-cli": "^0.0.11",
+    "@vscode/test-electron": "^2.5.2",
+    "eslint": "^9.36.0",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "basic-ftp": "^5.0.5",
+    "node-ssh": "^13.2.1",
+    "ssh2-sftp-client": "^12.0.1"
+  }
+}
